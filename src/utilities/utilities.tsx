@@ -38,6 +38,7 @@ export const checkEmailDuplicate = async (email: string): Promise<boolean> => {
     } else return false
 }
 
+
 const filterEvents =
     (
         place: google.maps.places.PlaceResult | null,
@@ -50,16 +51,19 @@ const filterEvents =
         if (place?.geometry?.location && geometry && events) {
             filtered = events.filter(item => {
 
-                const from = { lat: place?.geometry?.location?.lat() ?? 0, lng: place?.geometry?.location?.lng() ?? 0 }
-                const to = { lat: item.location.lat ?? 0, lng: item.location.lng ?? 0 }
+                if (item.location.lat && item.location.lng &&  place?.geometry?.location?.lat() &&  place?.geometry?.location?.lng()) {
 
-                const distance = geometry.spherical.computeDistanceBetween(
-                    new google.maps.LatLng(from),
-                    new google.maps.LatLng(to)
-                )
+                    const from = { lat: place?.geometry?.location?.lat(), lng: place?.geometry?.location?.lng()}
+                    const to = { lat: item.location.lat, lng: item.location.lng}
 
-                if (distance <= range * 1000) {
-                    return item
+                    const distance = geometry.spherical.computeDistanceBetween(
+                        new google.maps.LatLng(from),
+                        new google.maps.LatLng(to)
+                    )
+
+                    if (distance <= range * 1000) {
+                        return item
+                    }
                 }
 
             })

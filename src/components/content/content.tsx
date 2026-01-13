@@ -6,28 +6,33 @@ import {
 } from '..'
 import { useMapsLibrary } from '@vis.gl/react-google-maps';
 import { getEvents } from '../../utilities'
-import { EventsProps, contentProps } from '../../types'
+import { EventsProps } from '../../types'
+import { useAppContext } from '../../context/AppContext';
 
-export const Content = (props: contentProps) => {
+export const Content = () => {
 
-    const { selectedPlace, range } = props
+    const { selectedPlace, start_date, end_date, range } = useAppContext()
+
     const [filteredEvents, setFilteredEvents] = useState<EventsProps[] | []>([])
 
     const geometry = useMapsLibrary('geometry');
     const loadEvents = async () => {
 
-        const filtered = await getEvents({selectedPlace, range, geometry})
+        const filtered = await getEvents({selectedPlace, start_date, end_date, range, geometry})
 
         setFilteredEvents(filtered)
 
     }
+
     useEffect(() => {
 
         loadEvents()
 
     }, [])
 
-    console.log(filteredEvents)
+    console.log(selectedPlace)
+  
+    // console.log(filteredEvents)
 
     return (
         <div className='grid grid-cols-2 fixed top-[90px] h-[calc(100%-140px)] w-full'>

@@ -67,7 +67,7 @@ export const Register = () => {
             registerFormik.setFieldValue(fieldName, value, true)
 
     const showError = (field: keyof RegisterFormValues) => registerFormik.touched[field]
-        ? registerFormik.errors[field]
+        ? registerFormik.errors[field] as string
         : undefined
 
     return (

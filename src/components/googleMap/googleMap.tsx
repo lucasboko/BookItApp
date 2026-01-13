@@ -28,6 +28,7 @@ const getPosition = (place: google.maps.places.PlaceResult | null) =>
         : { lat: 45.5089192, lng: -73.5569074 }
 
 
+
 export const GoogleMap = (props: GoogleMapProps) => {
 
     const { place, events, range } = props
@@ -44,7 +45,9 @@ export const GoogleMap = (props: GoogleMapProps) => {
                 disableDefaultUI={true}
             >
                 {
-                    events.map((item, index) => <CardMarker key={index} price={item.price} position={item.position} />)
+                    events.map((item, index) => (
+                        <CardMarker key={index} {...item} />
+                    ))
                 }
                 <AdvancedMarker ref={markerRef} position={getPosition(place)}>
                     <Pin background={'#015237'} borderColor={'#bbb'} glyphColor={'#ffde59'} />
@@ -56,7 +59,7 @@ export const GoogleMap = (props: GoogleMapProps) => {
                     strokeOpacity={1}
                     strokeWeight={3}
                     fillColor={'#000000'}
-                    fillOpacity={0.3}
+                    fillOpacity={0.1}
                     // editable
                     // draggable
                 />

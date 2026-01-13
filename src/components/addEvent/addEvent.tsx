@@ -76,7 +76,7 @@ export const AddEvent = () => {
             newEventFormik.setFieldValue(fieldName, value, true)
 
     const showError = (field: keyof EventFormValues) => newEventFormik.touched[field]
-        ? newEventFormik.errors[field]
+        ? newEventFormik.errors[field] as string
         : undefined
 
     const showLocationError = () => newEventFormik.errors.location?.lat || newEventFormik.errors.location?.lng
@@ -101,23 +101,30 @@ export const AddEvent = () => {
     return (
         <div>
             <button
-                className="flex items-center text-center gap-[3px] px-3 rounded-full font-bold text-black cursor-pointer"
+                className={`
+                    py-[5px] px-[20px]  
+                    bg-white bg-gray-300 hover:bg-emerald-50 
+                    font-bold text-emerald-700 text-center text-xs
+                    cursor-pointer 
+                    border-1 border-emerald-700 rounded-full
+                    flex items-center gap-[5px]
+                `}
                 onClick={() => setShowModal(true)}
             >
-                <PlusIcon className='size-4' /> <span>New</span>
+                <PlusIcon className='size-4' /> <span>Add event</span>
             </button>
             {showModal &&
                 <Modal  >
                     <ModalHeader>Create Event</ModalHeader>
                     <ModalContent>
                         <div className="bg-gray-100 w-full h-50 border-1 border-gray-200 justify-items-center text-center rounded-2xl">
-                            <PlusCircleIcon className="size-10 text-emerald-400 mt-20 cursor-pointer" onClick={() => alert('upload image')}/>
+                            <PlusCircleIcon className="size-10 text-emerald-400 mt-20 cursor-pointer" onClick={() => alert('upload image')} />
                         </div>
                         <Input
                             width="w-full"
                             name="name"
                             placeholder="Enter your cool event name"
-                            // label="Event name"
+                            label="Event name"
                             onChange={val => handleChange(val, "name")}
                             value={newEventFormik.values.name}
                             error={showError("name")}
@@ -126,7 +133,7 @@ export const AddEvent = () => {
                         <Input
                             width="w-full"
                             name="arena"
-                            // label="Venue"
+                            label="Venue"
                             placeholder="What cool venue is it?"
                             onChange={val => handleChange(val, "arena")}
                             value={newEventFormik.values.arena}
@@ -141,14 +148,14 @@ export const AddEvent = () => {
                             placeholder="Vienna, Italy"
                             onPlaceSelect={val => handleLocationChange(val)}
                             error={showLocationError()}
-                            // label="Address"
+                            label="Address"
                         />
 
                         <div className="w-full flex gap-[4%]">
                             <Input
                                 width="w-[48%]"
                                 name="price"
-                                // label="Price"
+                                label="Price"
                                 type="number"
                                 onChange={val => handleChange(val, "price")}
                                 value={newEventFormik.values.price}
@@ -161,7 +168,7 @@ export const AddEvent = () => {
                             <Input
                                 width="w-[48%]"
                                 name="seats"
-                                // label="Tickets"
+                                label="Tickets"
                                 type="number"
                                 onChange={val => handleChange(val, "tickets")}
                                 value={newEventFormik.values.tickets}
@@ -179,7 +186,6 @@ export const AddEvent = () => {
                                 onChange={val => handleChange(val, "start_date")}
                                 value={newEventFormik.values.start_date}
                                 error={showError("start_date")}
-                                leftLabel
                             />
                             <DatePicker
                                 width="w-[48%]"
@@ -188,7 +194,6 @@ export const AddEvent = () => {
                                 onChange={val => handleChange(val, "end_date")}
                                 value={newEventFormik.values.end_date}
                                 error={showError("end_date")}
-                                leftLabel
                             />
                         </div>
 

@@ -3,9 +3,9 @@ import { EventsProps } from "../../types"
 import dayjs from "dayjs";
 
 const ASSETS_URL = import.meta.env.VITE_ASSETS_URL;
-console.log(ASSETS_URL)
 
 export const Event = (props: EventsProps) => {
+    
     const {
         name,
         description,
@@ -19,6 +19,7 @@ export const Event = (props: EventsProps) => {
 
     } = props
 
+    
     return (
         <div>
             <div
@@ -31,11 +32,11 @@ export const Event = (props: EventsProps) => {
                 h-50`
                 }
             />
-            <div className=" text-emerald-600 my-2 leading-snug  font-semibold">
+            <div className="text-emerald-600 my-2 leading-snug font-semibold">
                 {name}
             </div>
             
-            <div className="flex  items-center gap-1 grow text-black mt-2 leading-snug  font-semibold">
+            <div className="flex items-center gap-1 grow text-black mt-2 leading-snug  font-semibold">
                 <MapPinIcon className="flex-none size-4 text-gray-400" />
                 <a href="javascript:void()">{arena}</a>
             </div>

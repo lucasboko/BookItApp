@@ -53,7 +53,7 @@ export const Login = () => {
 
     const showError = (field: keyof LoginFormValues) =>
         loginFormik.touched[field]
-            ? loginFormik.errors[field]
+            ? loginFormik.errors[field] as string
             : undefined
 
 

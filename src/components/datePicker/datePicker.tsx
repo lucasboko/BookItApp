@@ -38,12 +38,12 @@ export const DatePicker = (props: DatePickerProps) => {
                     placeholder={value ? formatDate(value) : formatDate(todayUnix)}
                     value={value ? formatDate(value) : ''}
                     onChange={onChange}
-                    // rightIcon={<CalendarDaysIcon className="flex-none size-5 text-gray-400" />}
+                    rightIcon={<CalendarDaysIcon className="flex-none size-5 text-gray-400" />}
                     error={error}
                     onFocus={() => setOpen(true)}
                     readOnly
                 />
-                <div className={`border-1 border-gray-100 w-80 mt-1 absolute bg-white shadow-md rounded-lg ${open ? 'block' : 'hidden'} `}>
+                <div className={`border-1 border-gray-100 w-80 mt-1 absolute bg-white shadow-md rounded-lg z-40 ${open ? 'block' : 'hidden'} `}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateCalendar value={calValue} onChange={(newValue) => datePickerChange(newValue)} />
                     </LocalizationProvider>

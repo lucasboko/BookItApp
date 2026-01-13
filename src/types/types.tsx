@@ -1,5 +1,19 @@
 import { Dispatch, SetStateAction } from 'react'
 
+export type ContextType = {
+
+    selectedPlace: google.maps.places.PlaceResult | null
+    setSelectedPlace: React.Dispatch<React.SetStateAction<google.maps.places.PlaceResult | null>>
+
+    range: number
+    setRange: React.Dispatch<React.SetStateAction<number>>
+
+    setStartDate: React.Dispatch<React.SetStateAction<number | null>>
+    setEndDate: React.Dispatch<React.SetStateAction<number | null>>
+
+    start_date: number | null
+    end_date: number | null
+}
 
 export type PlaceAutocompleteProps = {
     onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void
@@ -51,8 +65,8 @@ export type EventsProps = {
     tickets: number
     arena: string
     location: {
-        lat: number | null
-        lng: number | null
+        lat: number
+        lng: number
     }
     start_date: number | null
     end_date: number | null
@@ -60,6 +74,8 @@ export type EventsProps = {
 
 export type GetEventsProps = {
     selectedPlace: google.maps.places.PlaceResult | null,
+    start_date: number | null,
+    end_date: number | null,
     range: number,
     geometry: google.maps.GeometryLibrary | null
 }
